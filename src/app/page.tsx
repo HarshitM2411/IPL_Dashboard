@@ -6,7 +6,8 @@ import Link from 'next/link';
 import MatchSwiper from './components/MatchSwiper';
 
 export default function Home() {
-  const { data, error } = useSWR('/api/scrape', fetcher, { refreshInterval: 60000 });
+  const { data, error } = useSWR('/api/scrape', fetcher, { refreshInterval: 15000 }); //will be calling api/scrape every 15 seconds to update the score to fetch the live updates.
+  console.log(data, 'myData');
   if (error) return <div>Failed to load data.</div>;
   if (!data) return <Loader />;
   const combinedMatches = data.liveMatch ? [data.liveMatch, ...data.upcomingMatches] : [...data.upcomingMatches];
